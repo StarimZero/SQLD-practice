@@ -140,13 +140,24 @@ select s.scode, sname, c.lcode, c.lname, e.grade from enrollments e, students s,
 create view view1 as select s.scode, sname, c.lcode, c.lname, e.grade from enrollments e, students s, courses c  where s.scode=e.scode and c.lcode=e.lcode order by grade; -- view 만들기
 select * from view1; -- view로보기
 drop view view1;
-select sname, year, birthday from students, professors where pcode=advisor and pname='이병렬'; /*'이병렬'과 교수가 지도하는 학생들의 이름, 학년, 생년월일을 검색하시오*/
-select s.scode, s.sname, c.lcode from enrollments e, courses c, students s where e.lcode=c.lcode and e.scode=s.scode ;/*'98/03/03'에 수강신청 한 학생들의 학번, 학생이름, 강좌번호를 검색하시오.*/
-select sname, year, birthday from students s, professors p where pcode=advisor and p.dept='전산';/*'전산'과 교수들이 지도하는 학생들의 이름, 학년, 생년월일을 검색하시오.*/
-select dept, pname from professors p, courses c where  p.pcode=c.instructor and c.lname='자료구조'; /*자료구조'를 강의하는 교수의 학과명, 교수 명을 검색하시오.*/
-select e.scode, e.edate, e.grade from courses c, enrollments e where e.lcode=c.lcode and c.lname = '파일처리론'; /*'파일처리론'을 수강신청 한 학생들의 학번, 수강신청일, 점수를 검색하시오.*/
-select s.dept, s.sname, e.grade from students s, enrollments e, courses c where e.scode=s.scode and c.lcode=e.lcode and c.lname = '자료구조'; /*'자료구조' 과목을 수강신청 한 학생들의 학과, 학생이름, 성적을 검색하시오.*/
-select s.scode, s.sname, c.lcode, c.lname, e.grade from students s, enrollments e, courses c where e.scode = s.scode and e.lcode = c.lcode and dept = '전자'; /*'전자과' 학생들의 학번, 학생이름, 수강신청 한 강좌번호, 강좌 명, 성적을 검색하시오.*/
-select p.pname, s.scode, s.sname from courses c, students s, professors p  where c.instructor = p.pcode and s.advisor = p.pcode and  c.lname = '파일처리론'; /*'파일처리론'을 강의하는 교수의 이름, 이 교수가 지도하는 학생들의 학번, 학생명을 검색하시오.*/
-select p.pname, s.dept, s.sname, e.grade from courses c, students s, enrollments e, professors p where p.pcode = c.instructor and c.lcode = e.lcode and e.scode = s.scode and c.lname = '데이터베이스'; /*'데이터베이스'를 강의하는 교수명, 이 과목을 수강신청 한 학생들의 학과, 이름, 성적을 검색하시오.*/
-select s.scode, s.sname, c.lname, c.instructor from courses c, students s, enrollments e, professors p where p.pcode = c.instructor and c.lcode = e.lcode and e.scode = s.scode and grade >= 80 ; /*성적이 80점 이상인 학생들의 학번, 학생이름, 강좌번호, 강좌명, 담당교수 명을 검색하시오.*/
+
+ /*'이병렬'과 교수가 지도하는 학생들의 이름, 학년, 생년월일을 검색하시오*/
+select sname, year, birthday from students, professors where pcode=advisor and pname='이병렬';
+/*'98/03/03'에 수강신청 한 학생들의 학번, 학생이름, 강좌번호를 검색하시오.*/
+select s.scode, s.sname, c.lcode from enrollments e, courses c, students s where e.lcode=c.lcode and e.scode=s.scode ;
+/*'전산'과 교수들이 지도하는 학생들의 이름, 학년, 생년월일을 검색하시오.*/
+select sname, year, birthday from students s, professors p where pcode=advisor and p.dept='전산';
+/*자료구조'를 강의하는 교수의 학과명, 교수 명을 검색하시오.*/
+select dept, pname from professors p, courses c where  p.pcode=c.instructor and c.lname='자료구조'; 
+ /*'파일처리론'을 수강신청 한 학생들의 학번, 수강신청일, 점수를 검색하시오.*/
+select e.scode, e.edate, e.grade from courses c, enrollments e where e.lcode=c.lcode and c.lname = '파일처리론';
+/*'자료구조' 과목을 수강신청 한 학생들의 학과, 학생이름, 성적을 검색하시오.*/
+select s.dept, s.sname, e.grade from students s, enrollments e, courses c where e.scode=s.scode and c.lcode=e.lcode and c.lname = '자료구조'; 
+ /*'전자과' 학생들의 학번, 학생이름, 수강신청 한 강좌번호, 강좌 명, 성적을 검색하시오.*/
+select s.scode, s.sname, c.lcode, c.lname, e.grade from students s, enrollments e, courses c where e.scode = s.scode and e.lcode = c.lcode and dept = '전자';
+/*'파일처리론'을 강의하는 교수의 이름, 이 교수가 지도하는 학생들의 학번, 학생명을 검색하시오.*/
+select p.pname, s.scode, s.sname from courses c, students s, professors p  where c.instructor = p.pcode and s.advisor = p.pcode and  c.lname = '파일처리론'; 
+/*'데이터베이스'를 강의하는 교수명, 이 과목을 수강신청 한 학생들의 학과, 이름, 성적을 검색하시오.*/
+select p.pname, s.dept, s.sname, e.grade from courses c, students s, enrollments e, professors p where p.pcode = c.instructor and c.lcode = e.lcode and e.scode = s.scode and c.lname = '데이터베이스'; 
+/*성적이 80점 이상인 학생들의 학번, 학생이름, 강좌번호, 강좌명, 담당교수 명을 검색하시오.*/
+select s.scode, s.sname, c.lname, c.instructor from courses c, students s, enrollments e, professors p where p.pcode = c.instructor and c.lcode = e.lcode and e.scode = s.scode and grade >= 80 ; 

@@ -86,6 +86,14 @@ select * from posts order by pid desc;
 
 select * from posts order by pid desc limit 0, 3; /* 0번 인덱스부터 3개  까지만 가져오겠따 */
 
+delete from posts where pid>140;
+
+desc users;
+
+alter table users add column phone varchar(20);/*테이블 변경하기 */
+alter table users modify column phone varchar(30); /*테이블 만든거 변경하기*/
+alter table users add column add1 varchar(100);/*테이블 변경하기 */
+alter table users add column add2 varchar(100);/*테이블 변경하기 */
 
 
 

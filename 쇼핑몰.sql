@@ -122,3 +122,26 @@ order by regDate desc;
 select * from goods;
 
 
+create table review(
+	rid int auto_increment primary key,
+    gid char(11) not null,
+    uid varchar(20) not null,
+    content text not null,
+    revDate datetime default now(),
+    foreign key(uid) references users(uid),
+    foreign key(gid) references goods(gid)
+);
+desc review;
+
+select * from review;
+
+delete from review where uid='blue';
+
+insert into review(gid, uid, content)
+select gid, uid, content from review;
+
+select count(*) from review;
+
+
+
+
